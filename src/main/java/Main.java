@@ -1,11 +1,15 @@
-import ConverterModule.ConverterBuilder;
-import ConverterModule.LocaleConverterBuilder;
 import ConverterModule.Сonverter;
+import java.util.Scanner;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
     public static void main(String[] args) {
-        ConverterBuilder builder = new LocaleConverterBuilder();
-        Сonverter converter = builder.buildConverter();
-        System.out.println(converter.convert(14));
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Scanner in = new Scanner(System.in);
+        int temp = in.nextInt();
+        Сonverter converter = context.getBean("convertor", Сonverter.class);
+        System.out.println(converter.convert(temp));
+        context.close();
     }
 }
